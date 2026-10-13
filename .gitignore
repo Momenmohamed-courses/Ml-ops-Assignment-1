@@ -1,0 +1,25 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# virtual environment
+.venv
+
+# secrets
+.env
+
+
+# caches
+.ruff_cache/
+.pytest_cache/
+
+# macOS
+.DS_Store
+
+# trained model 
+models/*
+!models/.gitkeep

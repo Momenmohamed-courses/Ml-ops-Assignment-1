@@ -1,0 +1,23 @@
+[project]
+name = "mlops-assignment-1"
+version = "0.1.0"
+description = "production assignment-1"
+readme = "README.md"
+authors = [
+    { name = "Momen"}
+]
+requires-python = ">=3.13"
+dependencies = [
+    "joblib>=1.6.0",
+    "pandas>=3.0.6",
+    "python-dotenv>=1.2.4",
+    "scikit-learn>=1.9.1",
+]
+
+[dependency-groups]
+dev = [
+    "black>=26.10.1",
+    "ipykernel>=7.4.0",
+    "pre-commit>=4.7.0",
+    "ruff>=0.17.0",
+]
