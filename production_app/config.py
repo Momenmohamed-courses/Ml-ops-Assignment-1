@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 @dataclass(frozen=True)
 class Settings:
     model_path: Path
@@ -15,11 +16,12 @@ class Settings:
     random_seed: int
     max_iter: int
 
-def load_settings()-> Settings:
-    test_size=float(os.getenv("TEST_SIZE","0.2"))
+
+def load_settings() -> Settings:
+    test_size = float(os.getenv("TEST_SIZE", "0.2"))
     if test_size <= 0 or test_size > 1:
         raise ValueError(f"invalid TEST_SIZE: {test_size}")
-    
+
     return Settings(
         model_path=Path(os.getenv("MODEL_PATH", "models/pipeline.joblib")),
         log_level=os.getenv("LOG_LEVEL", "INFO").upper(),
@@ -28,4 +30,6 @@ def load_settings()-> Settings:
         random_seed=int(os.getenv("RANDOM_SEED", "42")),
         max_iter=int(os.getenv("MAX_ITER", "1000")),
     )
-settings=load_settings()
+
+
+settings = load_settings()

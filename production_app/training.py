@@ -8,6 +8,7 @@ from production_app.preprocessing import build_preprocessor
 
 logger = get_logger(__name__)
 
+
 def build_pipeline(max_iter: int = settings.max_iter) -> Pipeline:
     return Pipeline(
         [
@@ -15,12 +16,11 @@ def build_pipeline(max_iter: int = settings.max_iter) -> Pipeline:
             ("model", LogisticRegression(max_iter=max_iter)),
         ]
     )
-                    
-def train_model(X_train: pd.DataFrame, y_train : pd.Series) -> Pipeline:
-    logger.info("Training started on %d rows",len(X_train))
-    pipeline=build_pipeline()
-    pipeline.fit(X_train,y_train)
+
+
+def train_model(X_train: pd.DataFrame, y_train: pd.Series) -> Pipeline:
+    logger.info("Training started on %d rows", len(X_train))
+    pipeline = build_pipeline()
+    pipeline.fit(X_train, y_train)
     logger.info("Training finished")
     return pipeline
-
-

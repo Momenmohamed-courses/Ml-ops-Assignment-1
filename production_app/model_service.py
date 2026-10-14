@@ -11,6 +11,7 @@ logger = get_logger(__name__)
 
 LABELS = {0: "malignant", 1: "benign"}
 
+
 class ModelNotFoundError(FileNotFoundError):
     """No saved model exists at the expected path."""
 
@@ -50,7 +51,9 @@ def validate_input(pipeline: Pipeline, features: pd.DataFrame) -> pd.DataFrame:
         clean = features[expected].astype(float)
     except ValueError as error:
         logger.error("Invalid input: non-numeric values")
-        raise InvalidInputError("Invalid prediction input: values must be numbers") from error
+        raise InvalidInputError(
+            "Invalid prediction input: values must be numbers"
+        ) from error
 
     if clean.isnull().any().any():
         logger.error("Invalid input: missing values")
