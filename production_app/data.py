@@ -1,10 +1,11 @@
+from pathlib import Path
+
 import pandas as pd
 from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split
 
 from production_app.config import settings
 from production_app.logging_config import get_logger
-from pathlib import Path
 
 logger = get_logger(__name__)
 
