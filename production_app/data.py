@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 
 from production_app.config import settings
 from production_app.logging_config import get_logger
+from pathlib import Path
 
 logger = get_logger(__name__)
 
@@ -21,3 +22,11 @@ def split_data(X: pd.DataFrame,
     X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = test_size,random_state = random_seed,stratify = y)
     logger.info("Split data: %d train rows, %d test rows",len(X_train),len(X_test))
     return X_train,X_test,y_train,y_test
+
+def load_prediction_input(path: Path) -> pd.DataFrame:
+    if not path.exists():
+        logger.error("Prediction input file not found: %s", path)
+        raise FileNotFoundError(f"Prediction input file not found: {path}")
+    features = pd.read_csv(path)
+    logger.info("Loaded prediction input: %d rows from %s", len(features), path)
+    return features
