@@ -67,3 +67,21 @@ def predict(pipeline: Pipeline, features: pd.DataFrame) -> list[str]:
     labels = [LABELS[int(value)] for value in pipeline.predict(clean)]
     logger.info("Predicted %d row(s): %s", len(labels), labels)
     return labels
+
+
+def predict_one(
+    pipeline: Pipeline, features: dict[str, float]
+) -> dict[str, int | str | float]:
+    data = validate_input(pipeline, pd.DataFrame([features]))
+    predicted_class = int(pipeline.predict(data)[0])
+    probability = float(pipeline.predict_proba(data)[0].max())
+
+    result = {
+        "predicted_class": predicted_class,
+        "label": LABELS[predicted_class],
+        "probability": probability,
+    }
+    logger.info(
+        "Predicted one patient: %s (probability %.3f)", result["label"], probability
+    )
+    return result
