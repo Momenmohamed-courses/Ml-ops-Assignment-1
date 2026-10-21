@@ -98,8 +98,8 @@ Then open a new terminal, or run `source $HOME/.local/bin/env`, so the `uv` comm
 ### 1. Clone and install
 
 ```bash
-git clone <repo-url>
-cd MLOps-Assignment-1
+git clone https://github.com/Momenmohamed-courses/Ml-ops-Assignment-1.git
+cd Ml-ops-Assignment-1
 uv sync
 ```
 
