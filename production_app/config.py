@@ -16,6 +16,8 @@ class Settings:
     random_seed: int
     max_iter: int
     selection_c: float
+    api_url: str
+    request_timeout: float
 
 
 def load_settings() -> Settings:
@@ -33,6 +35,8 @@ def load_settings() -> Settings:
         random_seed=int(os.getenv("RANDOM_SEED", "42")),
         max_iter=int(os.getenv("MAX_ITER", "1000")),
         selection_c=selection_c,
+        api_url=os.getenv("API_URL", "http://127.0.0.1:8000").rstrip("/"),
+        request_timeout=float(os.getenv("REQUEST_TIMEOUT", "5")),
     )
 
 

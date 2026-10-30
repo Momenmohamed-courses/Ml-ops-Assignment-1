@@ -25,6 +25,13 @@ dev = [
     "pytest>=9.2.0",
     "ruff>=0.17.0",
 ]
+ui = [
+    "requests>=2.34.2",
+    "streamlit>=1.66.1",
+]
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]
+
+[tool.uv]
+default-groups = ["dev", "ui"]
