@@ -1,0 +1,23 @@
+# Local environment and secrets
+.venv
+.env
+
+# Git and tooling
+.git
+.gitignore
+.pre-commit-config.yaml
+.ruff_cache
+.pytest_cache
+**/__pycache__
+**/*.pyc
+.ipynb_checkpoints
+.DS_Store
+
+# Not needed to run the API
+notebooks
+tests
+examples
+models
+streamlit_app.py
+run.py
+README.md
