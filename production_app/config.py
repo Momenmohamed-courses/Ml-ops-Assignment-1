@@ -15,13 +15,16 @@ class Settings:
     test_size: float
     random_seed: int
     max_iter: int
+    selection_c: float
 
 
 def load_settings() -> Settings:
     test_size = float(os.getenv("TEST_SIZE", "0.2"))
     if test_size <= 0 or test_size > 1:
         raise ValueError(f"invalid TEST_SIZE: {test_size}")
-
+    selection_c = float(os.getenv("SELECTION_C", "0.3"))
+    if selection_c <= 0:
+        raise ValueError(f"invalid SELECTION_C: {selection_c}")
     return Settings(
         model_path=Path(os.getenv("MODEL_PATH", "models/pipeline.joblib")),
         log_level=os.getenv("LOG_LEVEL", "INFO").upper(),
@@ -29,6 +32,7 @@ def load_settings() -> Settings:
         test_size=test_size,
         random_seed=int(os.getenv("RANDOM_SEED", "42")),
         max_iter=int(os.getenv("MAX_ITER", "1000")),
+        selection_c=selection_c,
     )
 
 
