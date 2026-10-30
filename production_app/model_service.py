@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 import joblib
@@ -85,3 +86,25 @@ def predict_one(
         "Predicted one patient: %s (probability %.3f)", result["label"], probability
     )
     return result
+
+
+def features_path(model_path: Path = settings.model_path) -> Path:
+    return model_path.with_suffix(".features.json")
+
+
+def save_feature_list(
+    features: list[str], model_path: Path = settings.model_path
+) -> Path:
+    path = features_path(model_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(features, indent=2))
+    logger.info("Feature list (%d features) saved to %s", len(features), path)
+    return path
+
+
+def load_feature_list(model_path: Path = settings.model_path) -> list[str]:
+    path = features_path(model_path)
+    if not path.exists():
+        logger.error("No feature list at %s", path)
+        raise ModelNotFoundError(f"No feature list at {path}. Run training first.")
+    return json.loads(path.read_text())

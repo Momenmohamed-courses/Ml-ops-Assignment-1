@@ -16,7 +16,7 @@ MALIGNANT = 0  # in this dataset: 0 = malignant, 1 = benign
 
 
 def evaluate_model(
-    pipeline: Pipeline, X_test: pd.DataFrame, y_test: pd.Series
+    pipeline: Pipeline, X_test: pd.DataFrame, y_test: pd.Series, name: str = "model"
 ) -> dict[str, float]:
     y_pred = pipeline.predict(X_test)
 
@@ -28,14 +28,16 @@ def evaluate_model(
     }
 
     logger.info(
-        "Evaluation (malignant class): accuracy=%.3f precision=%.3f recall=%.3f f1=%.3f",
+        "Evaluation [%s] (malignant class): accuracy=%.3f precision=%.3f recall=%.3f f1=%.3f",
+        name,
         metrics["accuracy"],
         metrics["precision"],
         metrics["recall"],
         metrics["f1"],
     )
     logger.info(
-        "Confusion matrix (rows=real, cols=predicted, malignant/benign): %s",
+        "Confusion matrix [%s] (rows=real, cols=predicted, malignant/benign): %s",
+        name,
         confusion_matrix(y_test, y_pred).tolist(),
     )
     return metrics

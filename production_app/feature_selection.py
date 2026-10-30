@@ -13,7 +13,7 @@ logger = get_logger(__name__)
 def select_features(
     X_train: pd.DataFrame, y_train: pd.Series, c: float = settings.selection_c
 ) -> list[str]:
-    l1_model = LogisticRegression(penalty="l1", solver="liblinear", C=c)
+    l1_model = LogisticRegression(l1_ratio=1.0, solver="liblinear", C=c)
     selector = Pipeline(
         [
             ("scaler", build_preprocessor()),
